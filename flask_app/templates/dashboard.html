@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shows</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class="text-center">Howdy {{user.first_name}}!!!</h1>
+    <div class="row">
+        <div class="col-md-12 bg-light text-right">
+            <a href="/shows/new" class="btn btn-info">+Create</a>
+            <a href="/logout" class="btn btn-info">Logout</a>
+        </div>
+    </div>
+    <h2 class="text">All TV Shows</h2>
+    <table id="data" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Network</th>
+                <th>Release Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for show in shows %}
+            <tr>
+                <td>{{ show.title }}</td>
+                <td>{{ show.network }}</td>
+                <td>{{ show.release_date }}</td>                
+                <td><a href="/show/{{show.id}}">Show</a>
+                {% if show.users_id == session.user_id %}
+                <a href="/edit/show/{{show.id}}">Edit</a>
+                <a href="/delete/show/{{show.id}}">Delete</a>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+</body>
+</html>
